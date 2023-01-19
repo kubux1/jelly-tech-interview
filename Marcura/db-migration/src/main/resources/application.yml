@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: db-migration
+  datasource:
+    url: ${db.url:jdbc:postgresql://localhost:5434/marcura}
+    username: ${db.username:default}
+    password: ${db.password:default}
+    driverClassName: org.postgresql.Driver

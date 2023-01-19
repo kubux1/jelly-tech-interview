@@ -1,0 +1,34 @@
+version: '3'
+services:
+  db:
+    image: postgres:12
+    environment:
+      - POSTGRES_PASSWORD=default
+      - POSTGRES_USER=default
+      - POSTGRES_DB=marcura
+    ports:
+      - "5434:5432"
+  db-migration:
+    build:
+      context: ./db-migration
+      dockerfile: Dockerfile
+    depends_on:
+      - "db"
+    environment:
+      - db.url=jdbc:postgresql://db:5432/marcura?charSet=UTF8
+      - db.username=default
+      - db.password=default
+  service:
+    build:
+      context: ./service
+      dockerfile: Dockerfile
+    depends_on:
+      - "db-migration"
+    environment:
+      - SPRING_PROFILES_ACTIVE=local
+      - db.url=jdbc:postgresql://db:5432/marcura?charSet=UTF8
+      - db.username=default
+      - db.password=default
+      - fixer.access-key=FIXER_API_ACCESS_KEY
+    ports:
+      - "8080:8080"

@@ -1,0 +1,4 @@
+# Ignore everything except the target files
+**
+!target/app.jar
+!Dockerfile

@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: service
+  datasource:
+    url: ${db.url:jdbc:postgresql://localhost:5434/marcura}
+    username: ${db.username:default}
+    password: ${db.password:default}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+api:
+  fixer:
+    url: https://api.apilayer.com/fixer
+    access-key: ${fixer.access-key}
+
+base-currency: USD
+spread:
+  base: 0.0
+  default: 2.75
